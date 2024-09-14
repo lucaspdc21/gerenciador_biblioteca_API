@@ -1,7 +1,7 @@
 from http.server import HTTPServer
-from requestHandler import RequestHandler
+from request_handler import RequestHandler
 
-def rodar_servidor(server_class=HTTPServer, handler_class=RequestHandler, port=8000):
+def run_server(server_class=HTTPServer, handler_class=RequestHandler, port=8000):
     server_address = ('', port)
     httpd = server_class(server_address, handler_class)
     print(f'Start...')
@@ -12,4 +12,4 @@ def rodar_servidor(server_class=HTTPServer, handler_class=RequestHandler, port=8
         httpd.server_close()
 
 if __name__ == '__main__':
-    rodar_servidor()
+    run_server()
