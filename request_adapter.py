@@ -115,7 +115,7 @@ class RequestAdapter():
                     return {
                         "status_code": 200,
                         "headers": {"Content-Type": "application/json"},
-                        "content": json.dumps(self.controller.list_authors()),
+                        "content": json.dumps(author),
                     }
             case ("authors", 3) if path[2] == "books": # GET /authors/{id}/books -- todos os livros de um autor
                 author = self.controller.get_author(path[1])
@@ -123,7 +123,7 @@ class RequestAdapter():
                     return {
                         "status_code": 200,
                         "headers": {"Content-Type": "application/json"},
-                        "content": json.dumps(self.controller.get_author_books(path[3])),
+                        "content": json.dumps(self.controller.get_author_books(path[1])),
                     }
 
         # Retorna 404 Not Found se o request não for encontrado no match case
