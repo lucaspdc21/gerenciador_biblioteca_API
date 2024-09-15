@@ -125,12 +125,7 @@ class LibraryController:
         # Deleta a associação entre o livro e o autor, se ele tiver author_id
         if book["author_id"] is not None:
             self.delete_association(book["author_id"], id)
-    
-    # Deleta um autor específico
-    def delete_author(self, id: int) -> None:
-        author = self.authors.pop(id)
-        # TODO: Deletar a associação entre o autor e seus livros, se ele tiver
-        
+
     # Desassocia um autor com um livro
     def delete_association(self, author_id: str, book_id: str) -> None:
         author = self.authors[author_id]
@@ -138,5 +133,10 @@ class LibraryController:
 
         author.books.pop(book_id)
         book[author_id] = None
+    
+    # Deleta um autor específico
+    def delete_author(self, id: int) -> None:
+        author = self.authors.pop(id)
         
-
+        for book_id, book in author.books.items():
+            delete_association(author, book_id)
