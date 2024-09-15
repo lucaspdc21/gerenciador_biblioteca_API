@@ -25,18 +25,33 @@ class LibraryController:
         else:
             return None; # o livro não existe
     
-    # TODO: Retorna um dicionário com todos os autores da biblioteca
+    # Retorna um dicionário com todos os autores da biblioteca
     # (convertendo os objetos dos autores para dicionários)
     def list_authors(self) -> dict:
-        pass
+        authors = {}
+        for id, author in self.authors.items():
+            authors[id] = author.to_dict()
+        return authors
+        
     
-    # TODO: Retorna um autor com id específico em forma de dicionário (null se não existe)
+    # Retorna um autor com id específico em forma de dicionário (null se não existe)
     def get_author(self, id: str) -> dict:
-        pass
+        author = self.authors.get(id).to_dict()
+        if author != None:
+            return author.to_dict()
+        else:
+            return None;
 
     # TODO: Retorna um dicionário com todos os livros de um autor específico
     def get_author_books(self, id: str) -> dict:
-        pass
+        author = self.authors.get(id)
+        if author is None:
+            return None # se o autor não existir, ele retorna None
+        
+        authors_books = {}
+        for book_id, book in self.authors[id].books.items():
+            authors_books[book_id] = book.to_dict()
+        return authors_books
 
 
     # Métodos POST
@@ -59,10 +74,12 @@ class LibraryController:
         author.books[book_id] = book
         book[author_id] = author
 
-    # TODO: Adiciona um autor na biblioteca
-    def create_author(self, data: dict) -> None:
-        pass
 
+    def create_author(self, data: dict) -> None:
+        author = author(data.get("name"), data.get("birthday"), data.get("nationality"))
+        self.authors[self.author_id_counter] = author
+        
+        self.author_id_counter += 1
 
     # Métodos PUT
     # Atualiza um livro específico
@@ -83,6 +100,19 @@ class LibraryController:
                 self.delete_association(data["author_id"], id)
         except: pass
 
+    def update_author(self, id: int, data: dict) -> None:
+        author = self.authors.get(id)
+        if author is None:
+            return None # está tentando atualizar um autor inexistente
+        
+        author = self.authors.get(id)
+        try: author.name = data["name"]
+        except: pass
+        try: author.birthday = data["birthday"]
+        except: pass
+        try: author.nationality = data["nationality"]
+        except: pass
+        
 
     # Métodos DELETE
     # Deleta um livro específico
@@ -100,3 +130,15 @@ class LibraryController:
 
         author.books.pop(book_id)
         book[author_id] = None
+        
+    def delete_author(self, id: int) -> None:
+        # remove o livro da database
+        author = self.authors.get(id)
+        if author is None:
+            return None # está tentando apagar um autor inexistente
+        
+        
+        author = self.authors.pop(id)
+        # TODO: Deletar a associação entre o autor e seus livros, se ele tiver
+        pass
+
