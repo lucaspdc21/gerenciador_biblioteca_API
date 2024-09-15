@@ -174,9 +174,28 @@ class RequestAdapter():
         # Retorna 404 Not Found se o alvo do request POST não for encontrado no match case
         return {"status_code": 404}
 
-    # TODO: requests PUT (PUT /books/{id}, PUT /authors/{id})
     def put(self, path: list, data: any) -> dict:
-        pass
+        if path[0] == "":  
+            return {"status_code": 403}
+
+        p0 = path[0]
+        match (p0, len(path)):
+            # Requests PUT válidos
+            case ("books", 2):  # PUT /books/{id}
+                response = self.validate_book(data)
+                if response["status_code"] != 200:
+                    return response
+                self.controller.update_book(path[1], data)
+                return {"status_code": 200}
+            case ("authors", 2):  # PUT /authors/{id}
+                response = self.validate_author(data)
+                if response["status_code"] != 200:
+                    return response
+                self.controller.update_author(path[1], data)
+                return {"status_code": 200}
+
+        # Retorna 404 Not Found se o request não for encontrado no match case
+        return {"status_code": 404}
 
 
     # requests DELETE (DELETE /books/{id}, DELETE /authors/{id}, DELETE /authors/{id}/books/{book_id})
