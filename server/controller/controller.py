@@ -1,5 +1,5 @@
-from author import Author
-from book import Book
+from models.author import Author
+from models.book import Book
 
 class LibraryController:
     def __init__(self):

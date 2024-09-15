@@ -1,5 +1,5 @@
 from http.server import HTTPServer
-from request_handler import RequestHandler
+from controller.request_handler import RequestHandler
 
 def run_server(server_class=HTTPServer, handler_class=RequestHandler, port=8000):
     server_address = ('', port)

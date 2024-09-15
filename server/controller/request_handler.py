@@ -2,7 +2,7 @@ import json
 import traceback
 from urllib.parse import urlparse
 from http.server import BaseHTTPRequestHandler
-from request_adapter import RequestAdapter
+from controller.request_adapter import RequestAdapter
 
 class RequestHandler(BaseHTTPRequestHandler):
     request_adapter = RequestAdapter()

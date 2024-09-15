@@ -1,5 +1,5 @@
 import json
-from controller import LibraryController
+from controller.controller import LibraryController
 # TODO: mover as mensagens de erro do status_message pra um content. do jeito que tá é bem paia.
 
 class RequestAdapter():
