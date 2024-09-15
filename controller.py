@@ -40,7 +40,7 @@ class LibraryController:
     
     # Retorna um autor com id específico em forma de dicionário (null se não existe)
     def get_author(self, id: str) -> dict:
-        author = self.authors.get(id).to_dict()
+        author = self.authors.get(id)
         if author != None:
             return author.to_dict()
         else:
@@ -75,12 +75,12 @@ class LibraryController:
         book = self.books[book_id]
 
         author.books[book_id] = book
-        book[author_id] = author
+        book.author_id = author_id
 
 
     def create_author(self, data: dict) -> None:
-        author = author(data.get("name"), data.get("birthday"), data.get("nationality"))
-        self.authors[self.author_id_counter] = author
+        author = Author(data.get("name"), data.get("birthday"), data.get("nationality"))
+        self.authors[str(self.author_id_counter)] = author
         
         self.author_id_counter += 1
 
@@ -132,7 +132,7 @@ class LibraryController:
         book = self.books[book_id]
 
         author.books.pop(book_id)
-        book[author_id] = None
+        book.author_id = None
     
     # Deleta um autor específico
     def delete_author(self, id: int) -> None:
