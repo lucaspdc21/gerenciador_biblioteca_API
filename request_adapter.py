@@ -205,5 +205,5 @@ class RequestAdapter():
                         self.controller.delete_association(path[1], path[3])
                         return {"status_code": 200}
                 else:
-                    return {"status_code": 404} # autor ou livro não existe        
+                    return {"status_code": 404} # autor ou livro não existe, ou a associação entre os dois não existe.
         return {"status_code": 404}
