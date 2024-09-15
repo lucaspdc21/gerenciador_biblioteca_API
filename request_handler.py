@@ -71,10 +71,33 @@ class RequestHandler(BaseHTTPRequestHandler):
 
     # Handler de requests PUT
     def do_PUT(self) -> None:
-        self._print_request()
-        self._send_response(501) # Not Implemented
+        data = self._get_data()
+        parsed_path = urlparse(self.path).path.strip("/").split("/")
+        
+        response = None
+        if self.headers.get("Content-Type") != "application/json":
+            response = {"status_code": 415, "status_message": "Este servidor só aceita JSON."}
+        else:
+            try:
+                data = json.loads(data)
+                response = self.request_adapter.put(parsed_path, data)
+            except json.JSONDecodeError:
+                response = {"status_code": 415}
+            except:
+                response = {"status_code": 500}
+        
+
+        self._send_response(response.get("status_code"), response.get("content"), 
+                            response.get("content_type"), response.get("status_message"))
 
     # Handler de requests DELETE
     def do_DELETE(self) -> None:
-        self._print_request()
-        self._send_response(501) # Not Implemented
+        data = self._get_data()
+        parsed_path = urlparse(self.path).path.strip("/").split("/")
+        
+        # obtém a resposta
+        response = self.request_adapter.delete(parsed_path, data)
+        
+        # envia a resposta pro cliente
+        self._send_response(response.get("status_code"), response.get("content"), 
+                            response.get("content_type"), response.get("status_message"))
