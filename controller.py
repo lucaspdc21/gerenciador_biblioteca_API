@@ -103,7 +103,7 @@ class LibraryController:
                 self.delete_association(data["author_id"], id)
         except: pass
 
-    def update_author(self, id: int, data: dict) -> None:
+    def update_author(self, id: str, data: dict) -> None:
         author = self.authors.get(id)
         if author is None:
             return None # está tentando atualizar um autor inexistente
@@ -135,7 +135,7 @@ class LibraryController:
         book.author_id = None
     
     # Deleta um autor específico
-    def delete_author(self, id: int) -> None:
+    def delete_author(self, id: str) -> None:
         author = self.authors.pop(id)
         
         for book_id, book in author.books.items():

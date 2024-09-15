@@ -189,19 +189,19 @@ class RequestAdapter():
             case("books", 2): # DELETE /books/{id}
                 book = self.controller.get_book(path[1])
                 if book is not None:
-                    self.controller.delete_book(data)
+                    self.controller.delete_book(path[1])
                     return {"status_code": 200}
                     
             case("authors", 2): # DELETE /authors/{id}
                 author = self.controller.get_author(path[1])
                 if author is not None:
-                    self.controller.delete_author(data)
+                    self.controller.delete_author(path[1])
                     return {"status_code": 200}
             case("authors", 4): # DELETE /authors/{id}/books/{id}
                 author = self.controller.get_author(path[1])
                 book = self.controller.get_book(path[3])
                 if author is not None and book is not None:
-                    if author.books[path[3]] is not None and book["author_id"] is not None:
+                    if author.books.get(path[3]) is not None and book.get("author_id") is not None:
                         self.controller.delete_association(path[1], path[3])
                         return {"status_code": 200}
                 else:
