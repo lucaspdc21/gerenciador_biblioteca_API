@@ -25,6 +25,7 @@ curl -X PUT "http://localhost:8000/authors/1" \
     -H "Content-Type: application/json" \
     -d '{"name": "John Ronald Reuel Tolkien", "birthday": 1892, "nationality": "Britânico"}' # Testa a rota PUT para atualizar um autor existente com dados atualizados.
 
+
 # Testar rotas DELETE
 curl -X DELETE "http://localhost:8000/books/1" # Testa a rota DELETE para remover um livro existente identificado pelo ID 1.
 curl -X DELETE "http://localhost:8000/authors/1" # Testa a rota DELETE para remover um autor existente identificado pelo ID 1.
