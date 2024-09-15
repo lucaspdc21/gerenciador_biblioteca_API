@@ -1,6 +1,6 @@
 import json
 from controller import LibraryController
-# TODO: ajeitar o status_message. tá paia.
+# TODO: mover as mensagens de erro do status_message pra um content. do jeito que tá é bem paia.
 
 class RequestAdapter():
     def __init__(self):
