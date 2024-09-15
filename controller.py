@@ -42,10 +42,9 @@ class LibraryController:
         else:
             return None;
 
-    # TODO: Retorna um dicionário com todos os livros de um autor específico
+    # Retorna um dicionário com todos os livros de um autor específico
     def get_author_books(self, id: str) -> dict:
-        author = self.authors.get(id)
-        if author is None:
+        if self.authors.get(id) is None:
             return None # se o autor não existir, ele retorna None
         
         authors_books = {}
@@ -122,6 +121,11 @@ class LibraryController:
         # Deleta a associação entre o livro e o autor, se ele tiver author_id
         if book["author_id"] is not None:
             self.delete_association(book["author_id"], id)
+    
+    # Deleta um autor específico
+    def delete_author(self, id: int) -> None:
+        author = self.authors.pop(id)
+        # TODO: Deletar a associação entre o autor e seus livros, se ele tiver
         
     # Desassocia um autor com um livro
     def delete_association(self, author_id: str, book_id: str) -> None:
@@ -131,14 +135,4 @@ class LibraryController:
         author.books.pop(book_id)
         book[author_id] = None
         
-    def delete_author(self, id: int) -> None:
-        # remove o livro da database
-        author = self.authors.get(id)
-        if author is None:
-            return None # está tentando apagar um autor inexistente
-        
-        
-        author = self.authors.pop(id)
-        # TODO: Deletar a associação entre o autor e seus livros, se ele tiver
-        pass
 

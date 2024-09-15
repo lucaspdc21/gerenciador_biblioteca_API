@@ -106,13 +106,13 @@ class RequestAdapter():
                     return response
                 self.controller.create_book(data)
                 return response
-            case ("authors", 1): # TODO: POST /authors
+            case ("authors", 1): # POST /authors
                 response = self.validate_author(data)
                 if response["status_code"] != 200:
                     return response
                 self.controller.create_author(data)
                 return response
-            case ("authors", 4): # TODO: POST /authors/{id}/books/{book_id}
+            case ("authors", 4): # POST /authors/{id}/books/{book_id}
                 author = self.controller.get_author(path[1])
                 book = self.controller.get_book(path[3])
                 if author is not None and book is not None:
