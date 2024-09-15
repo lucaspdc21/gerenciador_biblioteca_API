@@ -38,7 +38,7 @@ class RequestAdapter():
                     "headers": {"Content-Type": "application/json"},
                     "content": "{\"error\": \"author_id deve ser uma string.\"}",
                 }
-            elif self.controller.get_author(author_id): # Deve existir um autor com o ID
+            elif self.controller.get_author(author_id) is None: # Deve existir um autor com o ID
                 return {
                     "status_code": 400,
                     "headers": {"Content-Type": "application/json"},
@@ -132,11 +132,7 @@ class RequestAdapter():
 
     # requests POST (POST /books, POST /authors, POST /authors/{id}/books/{book_id})
     def post(self, path: list, data: any) -> dict:
-        if path[0] == "": # POST na pasta raiz
-            return {"status_code": 403}
-
-        p0 = path[0]
-        match (p0, len(path)):
+        match (path[0], len(path)):
             # Requests post válidos
             case ("books", 1): # POST /books -- cadastrar novo livro
                 response = self.validate_book(data)
@@ -167,8 +163,12 @@ class RequestAdapter():
                     return {"status_code": 404} # autor ou livro não existe                    
 
             # Requests post inválidos
-            case _: # POST dentro de um livro, autor, ou livro de autor
-                if self.get(path)["status_code"] != 200:
+            # POST na pasta raiz
+            case ("", 1):
+                return {"status_code": 403}
+            # POST dentro de um livro, autor, ou livros do autor
+            case ("books", 2) | ("authors", 2) | ("authors", 3):
+                if self.get(path)["status_code"] == 200:
                     return {"status_code": 403}
 
         # Retorna 404 Not Found se o alvo do request POST não for encontrado no match case
@@ -180,10 +180,7 @@ class RequestAdapter():
 
 
     # requests DELETE (DELETE /books/{id}, DELETE /authors/{id}, DELETE /authors/{id}/books/{book_id})
-    def delete(self, path: list, data: any = None) -> dict:
-        if path[0] == "": # DELETE na pasta raiz
-            return {"status_code": 403}
-            
+    def delete(self, path: list, data: any = None) -> dict:            
         match (path[0], len(path)):
             # Requests Deletes válidos
             case("books", 2): # DELETE /books/{id}
@@ -201,9 +198,21 @@ class RequestAdapter():
                 author = self.controller.get_author(path[1])
                 book = self.controller.get_book(path[3])
                 if author is not None and book is not None:
-                    if author.books.get(path[3]) is not None and book.get("author_id") is not None:
+                    if author["books"].get(path[3]) is not None and book.get("author_id") is not None:
                         self.controller.delete_association(path[1], path[3])
                         return {"status_code": 200}
                 else:
                     return {"status_code": 404} # autor ou livro não existe, ou a associação entre os dois não existe.
+                
+            # Requests post inválidos
+            # DELETE da pasta raiz, books ou authors
+            case ("", 1) | ("books", 1) | ("authors", 1):
+                return {"status_code": 403}
+            # DELETE dentro de um livro, autor, ou livro de autor
+            case ("books", 3) | ("authors" , 3) | ("authors", 5):
+                path.pop()
+                if self.get(path)["status_code"] == 200:
+                    return {"status_code": 403}
+            
+                    
         return {"status_code": 404}

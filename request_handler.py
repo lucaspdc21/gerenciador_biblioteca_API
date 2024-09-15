@@ -69,7 +69,7 @@ class RequestHandler(BaseHTTPRequestHandler):
         else:
             try:
                 if content_type is None:
-                    data = None
+                    data = {}
                 else:
                     data = json.loads(data)
                 response = self.request_adapter.post(parsed_path, data)
