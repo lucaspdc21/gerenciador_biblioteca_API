@@ -1,7 +1,7 @@
 from http.server import HTTPServer
-from request_parser import RequestParser
+from request_handler import RequestHandler
 
-def run_server(server_class=HTTPServer, handler_class=RequestParser, port=8000):
+def run_server(server_class=HTTPServer, handler_class=RequestHandler, port=8000):
     server_address = ('', port)
     httpd = server_class(server_address, handler_class)
     print(f'Start...')

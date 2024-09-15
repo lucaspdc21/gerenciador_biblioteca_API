@@ -18,9 +18,9 @@ class LibraryController:
         return books
 
     # Retorna um livro com id específico em forma de dicionário (null se não existe)
-    def get_book(self, id: int) -> dict:
-        book = self.books.get(id).to_dict()
-        if book != None:
+    def get_book(self, id: str) -> dict:
+        book = self.books.get(id)
+        if book is not None:
             return book.to_dict()
         else:
             return None; # o livro não existe
@@ -31,11 +31,11 @@ class LibraryController:
         pass
     
     # TODO: Retorna um autor com id específico em forma de dicionário (null se não existe)
-    def get_author(self, id: int) -> dict:
+    def get_author(self, id: str) -> dict:
         pass
 
     # TODO: Retorna um dicionário com todos os livros de um autor específico
-    def get_author_books(self, id: int) -> dict:
+    def get_author_books(self, id: str) -> dict:
         pass
 
 
@@ -43,16 +43,16 @@ class LibraryController:
     # Adiciona um livro na biblioteca
     def create_book(self, data: dict) -> None:
         book = Book(data.get("title"), data.get("genre"), data.get("year"), data.get("author_id"))
-        self.books[self.book_id_counter] = book
+        self.books[str(self.book_id_counter)] = book
         
         # Se o livro tem um author_id, linka ele com o autor
-        if data.get("author_id") != None:
+        if data.get("author_id") is not None:
             self.create_association(book, self.authors[data["author_id"]])
 
         self.book_id_counter += 1
     
     # Associa um autor com um livro
-    def create_association(self, author_id: int, book_id: int) -> None:
+    def create_association(self, author_id: str, book_id: str) -> None:
         author = self.authors[author_id]
         book = self.books[book_id]
 
@@ -66,7 +66,7 @@ class LibraryController:
 
     # Métodos PUT
     # Atualiza um livro específico
-    def update_book(self, id: int, data: dict) -> None:
+    def update_book(self, id: str, data: dict) -> None:
         livro = self.books.get(id)
 
         # Isso impede de sobscrever dados acidentalmente com None
@@ -86,15 +86,15 @@ class LibraryController:
 
     # Métodos DELETE
     # Deleta um livro específico
-    def delete_book(self, id: int) -> None:
+    def delete_book(self, id: str) -> None:
         # remove o livro da database
         book = self.books.pop(id)
         # Deleta a associação entre o livro e o autor, se ele tiver author_id
-        if book != None and book["author_id"] != None:
+        if book["author_id"] is not None:
             self.delete_association(book["author_id"], id)
         
     # Desassocia um autor com um livro
-    def delete_association(self, author_id: int, book_id: int) -> None:
+    def delete_association(self, author_id: str, book_id: str) -> None:
         author = self.authors[author_id]
         book = self.books[book_id]
 
