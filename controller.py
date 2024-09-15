@@ -9,6 +9,10 @@ class LibraryController:
         self.author_id_counter = 1
 
     # Métodos GET
+    # Retorna um dicionário com os dicionários de livros autores da biblioteca
+    def list_root(self) -> dict:
+        return {"books": self.list_books(), "authors": self.list_authors()}
+
     # Retorna um dicionário com todos os livros da biblioteca
     # (convertendo os objetos dos livros para dicionários)
     def list_books(self) -> dict:

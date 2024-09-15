@@ -44,10 +44,15 @@ class RequestAdapter():
 
     
     def get(self, path: list, data: any = None) -> dict:
-        if len(path) == 0: # TODO: retornar dicionário com ambos livros e autores?
-            return {"status_code": 403}
-        
         match (path[0], len(path)):
+            # Pasta raíz
+            case ("", 1): # GET /
+                return {
+                    "status_code": 200,
+                    "content_type": "application/json",
+                    "content": json.dumps(self.controller.list_root()),
+                }
+            
             # Livros
             case ("books", 1): # GET /books
                 return {
@@ -61,8 +66,9 @@ class RequestAdapter():
                     return {
                         "status_code": 200,
                         "content_type": "application/json",
-                        "content": json.dumps(book)
+                        "content": json.dumps(book),
                     }
+                    
             
             # Autores
             case ("authors", 1): # GET /authors
@@ -94,7 +100,7 @@ class RequestAdapter():
 
     # Adapta os requests POST pro controller
     def post(self, path: list, data: any) -> dict:
-        if len(path) == 0: # POST na pasta raiz
+        if path[0] == "": # POST na pasta raiz
             return {"status_code": 403}
 
         p0 = path[0]
