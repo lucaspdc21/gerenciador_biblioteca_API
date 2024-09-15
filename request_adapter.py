@@ -179,6 +179,31 @@ class RequestAdapter():
         pass
 
 
-    # TODO: requests DELETE (DELETE /books/{id}, DELETE /authors/{id}, DELETE /authors/{id}/books/{book_id})
+    # requests DELETE (DELETE /books/{id}, DELETE /authors/{id}, DELETE /authors/{id}/books/{book_id})
     def delete(self, path: list, data: any = None) -> dict:
-        pass
+        if path[0] == "": # DELETE na pasta raiz
+            return {"status_code": 403}
+            
+        match (path[0], len(path)):
+            # Requests Deletes válidos
+            case("books", 2): # DELETE /books/{id}
+                book = self.controller.get_book(path[1])
+                if book is not None:
+                    self.controller.delete_book(data)
+                    return {"status_code": 200}
+                    
+            case("authors", 2): # DELETE /authors/{id}
+                author = self.controller.get_author(path[1])
+                if author is not None:
+                    self.controller.delete_author(data)
+                    return {"status_code": 200}
+            case("authors", 4): # DELETE /authors/{id}/books/{id}
+                author = self.controller.get_author(path[1])
+                book = self.controller.get_book(path[3])
+                if author is not None and book is not None:
+                    if author.books[path[3]] is not None and book["author_id"] is not None:
+                        self.controller.delete_association(path[1], path[3])
+                        return {"status_code": 200}
+                else:
+                    return {"status_code": 404} # autor ou livro não existe        
+        return {"status_code": 404}
