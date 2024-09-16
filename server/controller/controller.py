@@ -61,13 +61,15 @@ class LibraryController:
     # Adiciona um livro na biblioteca
     def create_book(self, data: dict) -> None:
         book = Book(data.get("title"), data.get("genre"), data.get("year"), data.get("author_id"))
-        self.books[str(self.book_id_counter)] = book
+        book_id = str(self.book_id_counter)
+        self.books[book_id] = book
         
         # Se o livro tem um author_id, linka ele com o autor
         if data.get("author_id") is not None:
-            self.create_association(data["author_id"], str(self.book_id_counter))
+            self.create_association(data["author_id"], book_id)
 
         self.book_id_counter += 1
+        return book_id
     
     # Associa um autor com um livro
     def create_association(self, author_id: str, book_id: str) -> None:
@@ -79,10 +81,12 @@ class LibraryController:
 
 
     def create_author(self, data: dict) -> None:
+        author_id = str(self.author_id_counter)
         author = Author(data.get("name"), data.get("birthday"), data.get("nationality"))
-        self.authors[str(self.author_id_counter)] = author
+        self.authors[author_id] = author
         
         self.author_id_counter += 1
+        return author_id
 
     # Métodos PUT
     # Atualiza um livro específico

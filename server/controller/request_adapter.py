@@ -138,13 +138,17 @@ class RequestAdapter():
                 response = self.validate_book(data)
                 if response["status_code"] != 200:
                     return response
-                self.controller.create_book(data)
+                book_id = self.controller.create_book(data)
+                response["headers"] = {"Content-Type": "application/json"}
+                response["content"] = json.dumps(book_id) # retorna o id assimilado ao livro criado
                 return response
             case ("authors", 1): # POST /authors -- cadastrar novo autor
                 response = self.validate_author(data)
                 if response["status_code"] != 200:
                     return response
-                self.controller.create_author(data)
+                author_id = self.controller.create_author(data)
+                response["headers"] = {"Content-Type": "application/json"}
+                response["content"] = json.dumps(author_id) # retorna o id assimilado ao autor criado
                 return response
             case ("authors", 4): # POST /authors/{id}/books/{book_id} -- linkar autor e livro
                 author = self.controller.get_author(path[1])
