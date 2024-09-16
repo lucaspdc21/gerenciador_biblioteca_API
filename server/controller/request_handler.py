@@ -1,5 +1,6 @@
 import json
 import traceback
+import re
 from urllib.parse import urlparse
 from http.server import BaseHTTPRequestHandler
 from controller.request_adapter import RequestAdapter
@@ -57,7 +58,8 @@ class RequestHandler(BaseHTTPRequestHandler):
     # Handler de requests GET
     def do_GET(self) -> None:
         # pega os dados do request
-        parsed_path = urlparse(self.path).path.strip("/").split("/")
+        parsed_path = re.sub("/+", "/", urlparse(self.path).path.strip("/")).split("/")
+        print(parsed_path)
         
         # obtém a resposta
         response = self.request_adapter.get(parsed_path)
@@ -68,7 +70,7 @@ class RequestHandler(BaseHTTPRequestHandler):
     # Handler de requests POST
     def do_POST(self) -> None:
         data = self._get_data()
-        parsed_path = urlparse(self.path).path.strip("/").split("/")
+        parsed_path = re.sub("/+", "/", urlparse(self.path).path.strip("/")).split("/")
         
         response = None
         content_type = self.headers.get("Content-Type")
@@ -105,7 +107,7 @@ class RequestHandler(BaseHTTPRequestHandler):
     # Handler de requests PUT
     def do_PUT(self) -> None:
         data = self._get_data()
-        parsed_path = urlparse(self.path).path.strip("/").split("/")
+        parsed_path = re.sub("/+", "/", urlparse(self.path).path.strip("/")).split("/")
         
         response = None
         if self.headers.get("Content-Type") != "application/json":
@@ -134,7 +136,7 @@ class RequestHandler(BaseHTTPRequestHandler):
 
     # Handler de requests DELETE
     def do_DELETE(self) -> None:
-        parsed_path = urlparse(self.path).path.strip("/").split("/")
+        parsed_path = re.sub("/+", "/", urlparse(self.path).path.strip("/")).split("/")
         
         # obtém a resposta
         response = self.request_adapter.delete(parsed_path)
