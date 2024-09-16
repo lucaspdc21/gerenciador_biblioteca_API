@@ -44,20 +44,20 @@
                             <form id="add-book-form">
                                 <h3>Cadastrar Livro</h3>
                                 <div class="mb-3">
-                                    <label for="title" class="form-label">Título</label>
-                                    <input type="text" class="form-control" id="title" required>
+                                    <label for="title-add-book" class="form-label">Título</label>
+                                    <input type="text" class="form-control" id="title-add-book" required>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="genre" class="form-label">Gênero</label>
-                                    <input type="text" class="form-control" id="genre" >
+                                    <label for="genre-add-book" class="form-label">Gênero</label>
+                                    <input type="text" class="form-control" id="genre-add-book" >
                                 </div>
                                 <div class="mb-3">
-                                    <label for="year" class="form-label">Ano</label>
-                                    <input type="number" class="form-control" id="year" >
+                                    <label for="year-add-book" class="form-label">Ano</label>
+                                    <input type="number" class="form-control" id="year-add-book" placeholder="Ano">
                                 </div>
                                 <div class="mb-3">
-                                    <label for="author-id" class="form-label">ID do Autor</label>
-                                    <input type="number" class="form-control" id="author-id" >
+                                    <label for="author-id-add-book" class="form-label">ID do Autor</label>
+                                    <input type="number" class="form-control" id="author-id-add-book" >
                                 </div>
                                 <button type="button" class="btn btn-primary" onclick="addBook()">Adicionar Livro</button>
                             </form>
@@ -68,16 +68,16 @@
                             <form id="add-author-form">
                                 <h3>Cadastrar Autor</h3>
                                 <div class="mb-3">
-                                    <label for="author-name" class="form-label">Nome</label>
-                                    <input type="text" class="form-control" id="author-name" required>
+                                    <label for="author-name-add-author" class="form-label">Nome</label>
+                                    <input type="text" class="form-control" id="author-name-add-author" required>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="birthday" class="form-label">Ano de Nascimento</label>
-                                    <input type="number" class="form-control" id="birthday" placeholder="Ano" >
+                                    <label for="birthday-add-author" class="form-label">Ano de Nascimento</label>
+                                    <input type="number" class="form-control" id="birthday-add-author" placeholder="Ano">
                                 </div>
                                 <div class="mb-3">
-                                    <label for="nationality" class="form-label">Nacionalidade</label>
-                                    <input type="text" class="form-control" id="nationality" >
+                                    <label for="nationality-add-author" class="form-label">Nacionalidade</label>
+                                    <input type="text" class="form-control" id="nationality-add-author" >
                                 </div>
                                 <div class="mb-3">
                                     <label class="form-label invisible">Placeholder</label>
@@ -92,24 +92,24 @@
                             <form id="update-book-form">
                                 <h3>Atualizar Livro</h3>
                                 <div class="mb-3">
-                                    <label for="book-id" class="form-label">ID do Livro</label>
-                                    <input type="number" class="form-control" id="book-id" required>
+                                    <label for="book-id-update-book" class="form-label">ID do Livro</label>
+                                    <input type="number" class="form-control" id="book-id-update-book" required>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="title" class="form-label">Título</label>
-                                    <input type="text" class="form-control" id="title" required>
+                                    <label for="title-update-book" class="form-label">Título</label>
+                                    <input type="text" class="form-control" id="title-update-book" required>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="genre" class="form-label">Gênero</label>
-                                    <input type="text" class="form-control" id="genre">
+                                    <label for="genre-update-book" class="form-label">Gênero</label>
+                                    <input type="text" class="form-control" id="genre-update-book">
                                 </div>
                                 <div class="mb-3">
-                                    <label for="year" class="form-label">Ano</label>
-                                    <input type="number" class="form-control" id="year">
+                                    <label for="year-update-book" class="form-label">Ano</label>
+                                    <input type="number" class="form-control" id="year-update-book" placeholder="Ano">
                                 </div>
                                 <div class="mb-3">
-                                    <label for="author-id" class="form-label">ID do Autor</label>
-                                    <input type="number" class="form-control" id="author-id">
+                                    <label for="author-id-update-book" class="form-label">ID do Autor</label>
+                                    <input type="number" class="form-control" id="author-id-update-book">
                                 </div>
                                 <button type="button" class="btn btn-primary" onclick="updateBook()">Atualizar Livro</button>
                             </form>
@@ -120,20 +120,20 @@
                             <form id="update-author-form">
                                 <h3>Atualizar Autor</h3>
                                 <div class="mb-3">
-                                    <label for="author-id" class="form-label">ID do Autor</label>
-                                    <input type="number" class="form-control" id="author-id" required>
+                                    <label for="author-id-update-author" class="form-label">ID do Autor</label>
+                                    <input type="number" class="form-control" id="author-id-update-author" required>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="author-name" class="form-label">Nome</label>
-                                    <input type="text" class="form-control" id="author-name" required>
+                                    <label for="author-name-update-author" class="form-label">Nome</label>
+                                    <input type="text" class="form-control" id="author-name-update-author" required>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="birthday" class="form-label">Ano de Nascimento</label>
-                                    <input type="number" class="form-control" id="birthday" placeholder="Ano">
+                                    <label for="birthday-update-author" class="form-label">Ano de Nascimento</label>
+                                    <input type="number" class="form-control" id="birthday-update-author" placeholder="Ano">
                                 </div>
                                 <div class="mb-3">
-                                    <label for="nationality" class="form-label">Nacionalidade</label>
-                                    <input type="text" class="form-control" id="nationality">
+                                    <label for="nationality-update-author" class="form-label">Nacionalidade</label>
+                                    <input type="text" class="form-control" id="nationality-update-author">
                                 </div>
                                 <div class="mb-3">
                                     <label class="form-label invisible">Placeholder</label>
@@ -148,12 +148,12 @@
                             <form id="add-association-form">
                                 <h3>Adicionar Associação</h3>
                                 <div class="mb-3">
-                                    <label for="author-id" class="form-label">ID do Autor</label>
-                                    <input type="number" class="form-control" id="author-id" required>
+                                    <label for="author-id-add-association" class="form-label">ID do Autor</label>
+                                    <input type="number" class="form-control" id="author-id-add-association" required>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="book-id" class="form-label">ID do Livro</label>
-                                    <input type="number" class="form-control" id="book-id" required>
+                                    <label for="book-id-add-association" class="form-label">ID do Livro</label>
+                                    <input type="number" class="form-control" id="book-id-add-association" required>
                                 </div>
                                 <button type="button" class="btn btn-primary" onclick="addAssociation()">Adicionar Associação</button>
                             </form>
@@ -161,41 +161,41 @@
 
                         <!-- Formulário de deletar associação -->
                         <div class="col-md-6">
-                            <form id="remove-association-form">
+                            <form id="delete-association-form">
                                 <h3>Deletar Associação</h3>
                                 <div class="mb-3">
-                                    <label for="author-id" class="form-label">ID do Autor</label>
-                                    <input type="number" class="form-control" id="author-id" required>
+                                    <label for="author-id-delete-association" class="form-label">ID do Autor</label>
+                                    <input type="number" class="form-control" id="author-id-delete-association" required>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="book-id" class="form-label">ID do Livro</label>
-                                    <input type="number" class="form-control" id="book-id" required>
+                                    <label for="book-id-delete-association" class="form-label">ID do Livro</label>
+                                    <input type="number" class="form-control" id="book-id-delete-association" required>
                                 </div>
-                                <button type="button" class="btn btn-primary" onclick="removeAssociation()">Deletar Associação</button>
+                                <button type="button" class="btn btn-primary" onclick="deleteAssociation()">Deletar Associação</button>
                             </form>
                         </div>
 
-                        <!-- Formulário de remover livro -->
+                        <!-- Formulário de deletar livro -->
                         <div class="col-md-6">
-                            <form id="remove-book-form">
+                            <form id="delete-book-form">
                                 <h3>Deletar Livro</h3>
                                 <div class="mb-3">
-                                    <label for="book-id" class="form-label">ID do Livro</label>
-                                    <input type="number" class="form-control" id="book-id" required>
+                                    <label for="book-id-delete-book" class="form-label">ID do Livro</label>
+                                    <input type="number" class="form-control" id="book-id-delete-book" required>
                                 </div>
-                                <button type="button" class="btn btn-primary" onclick="removeBook()">Deletar Livro</button>
+                                <button type="button" class="btn btn-primary" onclick="deleteBook()">Deletar Livro</button>
                             </form>
                         </div>
 
-                        <!-- Formulário de remover autor -->
+                        <!-- Formulário de deletar autor -->
                         <div class="col-md-6">
-                            <form id="remove-author-form">
+                            <form id="delete-author-form">
                                 <h3>Deletar Autor</h3>
                                 <div class="mb-3">
-                                    <label for="author-id" class="form-label">ID do Autor</label>
-                                    <input type="number" class="form-control" id="author-id" required>
+                                    <label for="author-id-delete-author" class="form-label">ID do Autor</label>
+                                    <input type="number" class="form-control" id="author-id-delete-author" required>
                                 </div>
-                                <button type="button" class="btn btn-primary" onclick="removeAuthor()">Deletar Autor</button>
+                                <button type="button" class="btn btn-primary" onclick="deleteAuthor()">Deletar Autor</button>
                             </form>
                         </div>
                     </div>

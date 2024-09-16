@@ -13,7 +13,7 @@ class RequestAdapter():
         year = data.get("year")
         author_id = data.get("author_id")
 
-        if type(title) != str or title is None:
+        if type(title) != str or title == "" or title is None:
             return {
                 "status_code": 400,
                 "headers": {"Content-Type": "application/json"},

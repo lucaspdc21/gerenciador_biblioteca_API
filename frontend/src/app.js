@@ -18,7 +18,7 @@ function fetchBooks() {
             displayBooks(response.data);
         })
         .catch(error => {
-            console.error('Erro ao buscar livros:', error);
+            alert('Erro ao buscar livros: ' + error);
         });
 }
 
@@ -28,7 +28,7 @@ function fetchAuthors() {
             displayAuthors(response.data);
         })
         .catch(error => {
-            console.error('Erro ao buscar autores:', error);
+            alert('Erro ao buscar autores: ' + error);
         });
 }
 
@@ -73,10 +73,10 @@ function displayAuthors(data) {
 }
 
 function addBook() {
-    const title = document.getElementById('title').value;
-    let genre = document.getElementById('genre').value;
-    let year = document.getElementById('year').value;
-    let authorId = document.getElementById('author-id').value;
+    const title = document.getElementById('title-add-book').value;
+    let genre = document.getElementById('genre-add-book').value;
+    let year = document.getElementById('year-add-book').value;
+    let authorId = document.getElementById('author-id-add-book').value;
 
     // Se os campos estiverem vazios, defina como null
     genre = genre ? genre : null;
@@ -92,22 +92,23 @@ function addBook() {
 
     axios.post('http://localhost:8000/books', bookData)
     .then(response => {
-        alert('Livro adicionado com sucesso!');
+        alert('Livro adicionado com sucesso!\nID do livro: ' + response.data);
         fetchBooks(); // Atualiza a lista de livros
+        fetchAuthors(); // Atualiza a lista de autores
         clearForm("add-book-form");
     })
     .catch(error => {
-        console.error('Erro ao adicionar livro:', error);
+        alert('Erro ao adicionar livro: ' + error);
     });
 }
 
 function addAuthor() {
-    const name = document.getElementById('author-name').value;
-    let birthday = document.getElementById('birthday').value;
-    let nationality = document.getElementById('nationality').value;
+    const name = document.getElementById('author-name-add-author').value;
+    let birthday = document.getElementById('birthday-add-author').value;
+    let nationality = document.getElementById('nationality-add-author').value;
 
     // Se os campos estiverem vazios, defina como null
-    birthday = birthday ? birthday : null;
+    birthday = birthday ? parseInt(birthday) : null;
     nationality = nationality ? nationality : null;
 
     const authorData = {
@@ -118,12 +119,132 @@ function addAuthor() {
 
     axios.post('http://localhost:8000/authors', authorData)
     .then(response => {
-        alert('Autor adicionado com sucesso!');
+        alert('Autor adicionado com sucesso!\nID do autor: ' + response.data);
         fetchAuthors(); // Atualiza a lista de autores
         clearForm("add-author-form");
     })
     .catch(error => {
-        console.error('Erro ao adicionar autor:', error);
+        alert('Erro ao adicionar autor: ' + error);
+    });
+}
+
+function updateBook() {
+    const bookId = document.getElementById('book-id-update-book').value;
+    const title = document.getElementById('title-update-book').value;
+    let genre = document.getElementById('genre-update-book').value;
+    let year = document.getElementById('year-update-book').value;
+    let authorId = document.getElementById('author-id-update-book').value;
+    
+    // Se os campos estiverem vazios, defina como null
+    genre = genre ? genre : null;
+    year = year ? parseInt(year) : null;
+    authorId = authorId ? authorId : null;
+
+    const bookData = {
+        title: title, // Campo obrigatório
+        genre: genre,
+        year: year,
+        author_id: authorId
+    };
+
+    axios.put('http://localhost:8000/books/' + bookId, bookData)
+    .then(response => {
+        alert('Livro atualizado com sucesso!');
+        fetchBooks(); // Atualiza a lista de livros
+        fetchAuthors(); // Atualiza a lista de autores
+        clearForm("update-book-form");
+    })
+    .catch(error => {
+        alert('Erro ao atualizar livro: ' + error);
+    });
+}
+
+function updateAuthor() {
+    const authorId = document.getElementById('author-id-update-author').value;
+    const name = document.getElementById('author-name-update-author').value;
+    let birthday = document.getElementById('birthday-update-author').value;
+    let nationality = document.getElementById('nationality-update-author').value;
+
+    // Se os campos estiverem vazios, defina como null
+    birthday = birthday ? parseInt(birthday) : null;
+    nationality = nationality ? nationality : null;
+
+    const authorData = {
+        name: name, // Campo obrigatório
+        birthday: birthday,
+        nationality: nationality
+    };
+
+    axios.put('http://localhost:8000/authors/' + authorId, authorData)
+    .then(response => {
+        alert('Autor atualizado com sucesso!');
+        fetchAuthors(); // Atualiza a lista de autores
+        clearForm("update-author-form");
+    })
+    .catch(error => {
+        alert('Erro ao atualizar autor: ' + error);
+    });
+}
+
+function addAssociation() {
+    const book_id = document.getElementById('book-id-add-association').value; // Campo obrigatório
+    const author_id = document.getElementById('author-id-add-association').value // Campo obrigatório
+
+    axios.post('http://localhost:8000/authors/' + author_id + '/books/' + book_id)
+    .then(response => {
+        alert('Associação criada com sucesso!');
+        fetchBooks(); // Atualiza a lista de livros
+        fetchAuthors(); // Atualiza a lista de autores
+        clearForm("add-association-form");
+    })
+    .catch(error => {
+        alert('Erro ao criar associação: ' + error)
+    });
+}
+
+function deleteAssociation() {
+    const book_id = document.getElementById('book-id-delete-association').value; // Campo obrigatório
+    const author_id = document.getElementById('author-id-delete-association').value // Campo obrigatório
+
+    axios.delete('http://localhost:8000/authors/' + author_id + '/books/' + book_id)
+    .then(response => {
+        alert('Associação deletada com sucesso!');
+        fetchBooks(); // Atualiza a lista de livros
+        fetchAuthors(); // Atualiza a lista de autores
+        clearForm("delete-association-form");
+    })
+    .catch(error => {
+        alert('Erro ao deletar associação: ' + error)
+    });
+}
+
+function deleteBook() {
+    const id = document.getElementById('book-id-delete-book').value; // Campo obrigatório
+    
+    axios.delete('http://localhost:8000/books/' + id)
+    .then(response => {
+        alert('Livro deletado com sucesso!');
+        fetchBooks(); // Atualiza a lista de livros
+        fetchAuthors(); // Atualiza a lista de autores
+        clearForm("delete-book-form");
+    })
+    .catch(error => {
+        alert('Erro ao deletar livro: ' + error)
+    });
+}
+
+function deleteAuthor() {
+    const id = document.getElementById('author-id-delete-author').value; // Campo obrigatório
+
+    axios.delete('http://localhost:8000/authors/' + id)
+    .then(response => {
+        alert('Autor deletado com sucesso!');
+        fetchBooks(); // Atualiza a lista de livros
+        fetchAuthors(); // Atualiza a lista de autores
+        clearForm("delete-author-form");
+    })
+    .catch(error => {
+        alert('Erro ao deletar autor: ' + error);
     });
 }
 
