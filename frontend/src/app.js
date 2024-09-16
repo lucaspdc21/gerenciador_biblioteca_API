@@ -108,8 +108,10 @@ function addAuthor() {
     let nationality = document.getElementById('nationality-add-author').value;
 
     // Se os campos estiverem vazios, define como null
-    birthday = birthday ? parseInt(birthday) : null;
+    birthday = birthday ? birthday.split('-').reverse().join('/') : null;
     nationality = nationality ? nationality : null;
+
+    alert(birthday)
 
     const authorData = {
         name: name, // Campo obrigatório

@@ -1,4 +1,5 @@
 import json
+import datetime
 from controller.controller import LibraryController
 # TODO: mover as mensagens de erro do status_message pra um content. do jeito que tá é bem paia.
 
@@ -59,12 +60,23 @@ class RequestAdapter():
                 "headers": {"Content-Type": "application/json"},
                 "content": "{\"error\": \"Nome é obrigatório e deve ser uma string.\"}",
             }
-        if type(birthday) != int and birthday is not None:
+        if type(birthday) != str and birthday is not None:
             return {
                 "status_code": 400,
                 "headers": {"Content-Type": "application/json"},
-                "content": "{\"error\": \"Data de nascimento deve ser um número inteiro.\"}",
+                "content": "{\"error\": \"Data de nascimento deve ser uma string. Formato: dd/mm/yyyy\"}",
             }
+        elif birthday is not None:
+            # testa se a data é válida.
+            try:
+                date = birthday.split("/")
+                datetime.datetime(day = int(date[0]), month = int(date[1]), year=int(date[2]))
+            except:
+                return {
+                    "status_code": 400,
+                    "headers": {"Content-Type": "application/json"},
+                    "content": "{\"error\": \"Data de nascimento inválida. Formato: dd/mm/yyyy\"}",
+                }
         if type(nationality) != str and nationality is not None:
             return {
                 "status_code": 400,

@@ -1,5 +1,5 @@
 class Author:
-    def __init__(self, name, birthday=None, nationality=None):
+    def __init__(self, name: str, birthday: str = None, nationality: str = None):
         self.name = name
         self.books = {}
         self.birthday = birthday
