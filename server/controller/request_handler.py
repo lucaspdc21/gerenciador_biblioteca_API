@@ -59,7 +59,6 @@ class RequestHandler(BaseHTTPRequestHandler):
     def do_GET(self) -> None:
         # pega os dados do request
         parsed_path = re.sub("/+", "/", urlparse(self.path).path.strip("/")).split("/")
-        print(parsed_path)
         
         # obtém a resposta
         response = self.request_adapter.get(parsed_path)
