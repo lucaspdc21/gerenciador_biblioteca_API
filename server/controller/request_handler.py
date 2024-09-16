@@ -14,6 +14,14 @@ class RequestHandler(BaseHTTPRequestHandler):
         data = self._get_data()
         print(f'Received data: {data.decode()}')
 
+    # Função que lida com requests OPTIONS (fornt-end)
+    def do_OPTIONS(self) -> None:
+        self.send_response(200)
+        self.send_header('Access-Control-Allow-Origin', '*')
+        self.send_header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS')
+        self.send_header('Access-Control-Allow-Headers', 'Content-Type')
+        self.end_headers()
+
     # Wrapper da obtenção dos dados de um request
     def _get_data(self) -> None:
         content_length = int(self.headers["Content-Length"] or 0)
@@ -32,6 +40,11 @@ class RequestHandler(BaseHTTPRequestHandler):
         headers = response.get("headers", {})
         for key, value in headers.items():
             self.send_header(key, value)
+
+        # Headers de CORS
+        self.send_header('Access-Control-Allow-Origin', '*')
+        self.send_header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS')
+        self.send_header('Access-Control-Allow-Headers', 'Content-Type')
         self.end_headers()
 
         # Manda o conteúdo da resposta em utf-8

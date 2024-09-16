@@ -1,0 +1,50 @@
+.sidebar {
+    position: fixed;
+    height: 100vh;
+    background-color: #c70d0d;
+    padding-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.sidebar .nav-link {
+    color: #fff;
+    background-color: #d32f2f; 
+    border: none;
+    margin-bottom: 10px;
+    width: 100%;
+    text-align: center;
+}
+.sidebar .nav-link:hover {
+    background-color: #b71c1c; 
+}
+
+.content {
+    padding: 20px;
+}
+.btn-primary {
+    background-color: #c70d0d;
+    border-color: #c70d0d;
+}
+.btn-primary:hover {
+    background-color: #b71c1c;
+    border-color: #b71c1c;
+}
+
+form {
+    background-color: #f0f0f0; 
+    border-radius: 10px; 
+    padding: 20px; 
+}
+form h3 {
+    text-align: center;
+}
+form .btn {
+    display: block;
+    margin: 0 auto;
+}
+#consulta-section table {
+    background-color: #f0f0f0; /* Same gray background as forms */
+   
+
+}
