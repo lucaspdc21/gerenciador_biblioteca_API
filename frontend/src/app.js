@@ -74,16 +74,23 @@ function displayAuthors(data) {
 
 function addBook() {
     const title = document.getElementById('title').value;
-    const genre = document.getElementById('genre').value;
-    const year = document.getElementById('year').value;
-    const authorId = document.getElementById('author-id').value;
+    let genre = document.getElementById('genre').value;
+    let year = document.getElementById('year').value;
+    let authorId = document.getElementById('author-id').value;
 
-    axios.post('http://localhost:8000/books', {
-        title: title,
+    // Se os campos estiverem vazios, defina como null
+    genre = genre ? genre : null;
+    year = year ? parseInt(year) : null;
+    authorId = authorId ? authorId : null;
+
+    const bookData = {
+        title: title, // Campo obrigatório
         genre: genre,
-        year: parseInt(year),
+        year: year,
         author_id: authorId
-    })
+    };
+
+    axios.post('http://localhost:8000/books', bookData)
     .then(response => {
         alert('Livro adicionado com sucesso!');
         fetchBooks(); // Atualiza a lista de livros
@@ -96,14 +103,20 @@ function addBook() {
 
 function addAuthor() {
     const name = document.getElementById('author-name').value;
-    const birthday = document.getElementById('birthday').value;
-    const nationality = document.getElementById('nationality').value;
+    let birthday = document.getElementById('birthday').value;
+    let nationality = document.getElementById('nationality').value;
 
-    axios.post('http://localhost:8000/authors', {
-        name: name,
-        birthday: parseInt(birthday),
+    // Se os campos estiverem vazios, defina como null
+    birthday = birthday ? birthday : null;
+    nationality = nationality ? nationality : null;
+
+    const authorData = {
+        name: name, // Campo obrigatório
+        birthday: birthday,
         nationality: nationality
-    })
+    };
+
+    axios.post('http://localhost:8000/authors', authorData)
     .then(response => {
         alert('Autor adicionado com sucesso!');
         fetchAuthors(); // Atualiza a lista de autores
@@ -113,6 +126,7 @@ function addAuthor() {
         console.error('Erro ao adicionar autor:', error);
     });
 }
+
 function clearForm(formId) {
     document.getElementById(formId).reset();
 }
