@@ -111,8 +111,6 @@ function addAuthor() {
     birthday = birthday ? birthday.split('-').reverse().join('/') : null;
     nationality = nationality ? nationality : null;
 
-    alert(birthday)
-
     const authorData = {
         name: name, // Campo obrigatório
         birthday: birthday,
