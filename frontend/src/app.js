@@ -107,7 +107,7 @@ function addAuthor() {
     let birthday = document.getElementById('birthday-add-author').value;
     let nationality = document.getElementById('nationality-add-author').value;
 
-    // Se os campos estiverem vazios, defina como null
+    // Se os campos estiverem vazios, define como null
     birthday = birthday ? parseInt(birthday) : null;
     nationality = nationality ? nationality : null;
 
@@ -135,7 +135,7 @@ function updateBook() {
     let year = document.getElementById('year-update-book').value;
     let authorId = document.getElementById('author-id-update-book').value;
     
-    // Se os campos estiverem vazios, defina como null
+    // Se os campos estiverem vazios, define como null
     genre = genre ? genre : null;
     year = year ? parseInt(year) : null;
     authorId = authorId ? authorId : null;
@@ -165,7 +165,7 @@ function updateAuthor() {
     let birthday = document.getElementById('birthday-update-author').value;
     let nationality = document.getElementById('nationality-update-author').value;
 
-    // Se os campos estiverem vazios, defina como null
+    // Se os campos estiverem vazios, define como null
     birthday = birthday ? parseInt(birthday) : null;
     nationality = nationality ? nationality : null;
 
