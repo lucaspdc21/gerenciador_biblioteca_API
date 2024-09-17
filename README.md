@@ -1,6 +1,8 @@
 # Projeto de API Biblioteca
 Uma simples API REST, capaz de gerenciar alguns elementos de uma biblioteca e um frontend capaz de consumir essa API possibilitando testar o servico.
 
+[Relatório do projeto](https://docs.google.com/document/d/1LCVqZfnoafkD_5QALPn5PptOE0VVdfd0bvBkuZ-iBMw/edit?usp=sharing)
+
 ## Estrutura do Projeto
 - **API(Server)**: Desenvolvido em Python, utilizando os módulos http e urllib
 - **Front-end**: Implementado com Node, utilizando JavaScript, CSS e HTML para criar uma interface web que interage com a API.
