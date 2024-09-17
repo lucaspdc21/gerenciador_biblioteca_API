@@ -14,6 +14,9 @@ O projeto foi organizado seguindo o padrão mvc, dentro da pasta `/server` é po
 
 ## Como Executar o Projeto
 ### API
+#### Opção 1:
+Execute o script shell `run_server.sh`
+#### Opção 2: (Manual)
 1. Navegue até a pasta server
 ```bash
 cd server
@@ -40,5 +43,7 @@ npm install
 node server.js
 ```
 5. O frontend será aberto na porta `localhost:3000`
+
+Após a instalação das dependências também é possível executar o script shell `run_frontend.sh`
 # Documentação da API
 https://app.swaggerhub.com/apis-docs/LucasPinheiro/Library_API/1.0.0#/
