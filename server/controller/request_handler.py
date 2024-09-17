@@ -15,7 +15,7 @@ class RequestHandler(BaseHTTPRequestHandler):
         data = self._get_data()
         print(f'Received data: {data.decode()}')
 
-    # Função que lida com requests OPTIONS (fornt-end)
+    # Função que lida com requests OPTIONS, adiciona os cabeçalhos para permitir o controle de acesso
     def do_OPTIONS(self) -> None:
         self.send_response(200)
         self.send_header('Access-Control-Allow-Origin', '*')
