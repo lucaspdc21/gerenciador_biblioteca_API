@@ -24,7 +24,7 @@ python main.py
 ```
 3. Após isso o servidor será iniciado na porta `localhost:8000`
 
-### Front-end (Font-ind)
+### Front-end
 
 1. Para executar o frontend é necessário ter o node instalado em sua máquina, consulte a documentação [aqui](https://nodejs.org/en/download/package-manager)
 2. Navegue até a pasta server
